@@ -65,4 +65,31 @@ class Address extends BaseModel
          * @var boolean
          */
         protected $addressVerified;
+
+	/**
+	 * @param $value
+	 */
+	protected function setResidentialAttribute($value)
+	{
+		if ($value) {
+			$this->residential = 'true';
+		} else {
+			$this->residential = 'false';
+		}
+	}
+
+	/**
+	 * @param $value
+	 */
+	protected function setAddressVerifiedAttribute($value)
+	{
+		if ( 1 < strlen( $value ) ) {
+			$this->addressVerified = $value;
+		} elseif ( $value ) {
+			$this->addressVerified = 'true';
+		} else {
+			$this->addressVerified = 'false';
+		}
+	}
+
 }
