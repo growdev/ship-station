@@ -31,7 +31,14 @@ abstract class BaseModel implements ArrayAccess, Arrayable
     protected function setAttributes($attributes = [])
     {
         foreach ($attributes as $key => $value) {
-            $this->$key = $value;
+            //$this->$key = $value;
+
+			$method = 'set'.ucwords($key).'Attribute';
+			if (method_exists($this, $method)) {
+				$this->$method($value);
+			} else {
+				$this->$key = $value;
+			}
         }
 
         return $this;
@@ -55,12 +62,6 @@ abstract class BaseModel implements ArrayAccess, Arrayable
         foreach ($object as $key => $value) {
             if (is_object($value) && $value instanceof Arrayable) {
                 $object[$key] = $value->toArray();
-            }
-            
-            if (is_array($value)) {
-                $object[$key] = array_map(static function ($item) {
-                    return is_object($item) && $item instanceof Arrayable ? $item->toArray() : $item;
-                }, $value);
             }
         }
 
