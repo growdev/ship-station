@@ -6,95 +6,26 @@ namespace MichaelB\ShipStation\Models;
 
 class OrderItem extends BaseModel
 {
-    /**
-     * @var int
-     */
-    protected $orderItemId;
-
-    /**
-     * @var string
-     */
-    protected $lineItemKey;
-
-    /**
-     * @var string
-     */
-    protected $sku;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $imageUrl;
-
-    /**
-     * @var Weight
-     */
-    protected $weight;
-
-    /**
-     * @var int
-     */
-    protected $quantity;
-
-    /**
-     * @var int
-     */
-    protected $unitPrice;
-
-    /**
-     * @var int
-     */
-    protected $taxAmount;
-
-    /**
-     * @var int
-     */
-    protected $shippingAmount;
-
-    /**
-     * @var string
-     */
-    protected $warehouseLocation;
-
-    /**
-     * @var ItemOption[]
-     */
-    protected $options;
-
-    /**
-     * @var int
-     */
-    protected $productId;
-
-    /**
-     * @var string
-     */
-    protected $fulfillmentSku;
-
-    /**
-     * @var boolean
-     */
-    protected $adjustment;
-
-    /**
-     * @var string
-     */
-    protected $upc;
-
-    /**
-     * @var string
-     */
-    protected $createDate;
-
-    /**
-     * @var string
-     */
-    protected $modifyDate;
+    protected $attributes = [
+        'orderItemId',
+        'lineItemKey',
+        'sku',
+        'name',
+        'imageUrl',
+        'weight',
+        'quantity',
+        'unitPrice',
+        'taxAmount',
+        'shippingAmount',
+        'warehouseLocation',
+        'options',
+        'productId',
+        'fulfillmentSku',
+        'adjustment',
+        'upc',
+        'createDate',
+        'modifyDate'
+    ];
 
     protected function setWeightAttribute($value)
     {
@@ -104,4 +35,13 @@ class OrderItem extends BaseModel
             $this->weight = new Weight($value);
         }
     }
+
+	protected function setAdjustmentAttribute($value)
+	{
+		if ( 'true' === $value ) {
+			$this->adjustment = 'true';
+		} else {
+			$this->adjustment = 'false';
+		}
+	}
 }
