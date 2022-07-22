@@ -26,6 +26,17 @@ class Orders extends BaseEndpoint
         return $this->get($order_id);
     }
 
+	/**
+	 * Lookup Order by WooCommerce order number
+	 *
+	 * @param string $order_number
+	 * @return \GuzzleHttp\Psr7\Response
+	 */
+	public function getWCOrder($order_number)
+	{
+		return $this->api->get('orders?orderNumber=' . $order_number );
+	}
+
     /**
      * Delete an order
      *
