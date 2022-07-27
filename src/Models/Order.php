@@ -231,6 +231,22 @@ class Order extends BaseModel
         }
     }
 
+	/**
+	 * @param $value array of items
+	 */
+	protected function setItemsAttribute($value)
+	{
+		$items = [];
+		foreach ( $value as $key => $item ){
+			if ( $item instanceof OrderItem ) {
+				$items[$key] = $item;
+			} else {
+				$items[$key] = new OrderItem( $item );
+			}
+		}
+		$this->items = $items;
+	}
+
     /**
      * @param $value
      */
@@ -249,11 +265,13 @@ class Order extends BaseModel
      */
     protected function setDimensionsAttribute($value)
     {
+
         if ($value instanceof Dimensions) {
-            $thisdimensions = $value;
-        } else {
+            $this->dimensions = $value;
+        } elseif ( is_array( $value ) ) {
             $this->dimensions = new Dimensions($value);
         }
+
     }
 
     /**
@@ -291,4 +309,29 @@ class Order extends BaseModel
             $this->advancedOptions = new AdvancedOptions($value);
         }
     }
+
+	/**
+	 * @param $value
+	 */
+	protected function setGiftAttribute($value)
+	{
+		if ($value) {
+			$this->gift = 'true';
+		} else {
+			$this->gift = 'false';
+		}
+	}
+
+	/**
+	 * @param $value
+	 */
+	protected function setExternallyFulfilledAttribute($value)
+	{
+		if ($value) {
+			$this->externallyFulfilled = 'true';
+		} else {
+			$this->externallyFulfilled = 'false';
+		}
+	}
+
 }

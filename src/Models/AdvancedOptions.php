@@ -18,7 +18,7 @@ class AdvancedOptions extends BaseModel
     /**
      * @var boolean
      */
-    public $saturdayDeliver;
+    public $saturdayDelivery;
 
     /**
      * @var boolean
@@ -85,4 +85,40 @@ class AdvancedOptions extends BaseModel
      * @var string
      */
     public $billToCountryCode;
+
+	protected function setNonMachinableAttribute($value)
+	{
+		if ($value) {
+			$this->nonMachinable = 'true';
+		} else {
+			$this->nonMachinable = 'false';
+		}
+	}
+
+	protected function setSaturdayDeliveryAttribute($value)
+	{
+		if ($value) {
+			$this->saturdayDelivery = 'true';
+		} else {
+			$this->saturdayDelivery = 'false';
+		}
+	}
+
+	protected function setContainsAlcoholAttribute($value)
+	{
+		if ($value) {
+			$this->containsAlcohol = 'true';
+		} else {
+			$this->containsAlcohol = 'false';
+		}
+	}
+
+	protected function setMergedOrSplitAttribute($value)
+	{
+		if ($value) {
+			$this->mergedOrSplit = 'true';
+		} else {
+			$this->mergedOrSplit = 'false';
+		}
+	}
 }

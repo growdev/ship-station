@@ -26,4 +26,16 @@ class InsuranceOptions extends BaseModel
      * @var int
      */
     public $insuredValue;
+
+	/**
+	 * @param $value
+	 */
+	protected function setInsureShipmentAttribute($value)
+	{
+		if ($value) {
+			$this->insureShipment = 'true';
+		} else {
+			$this->insureShipment = 'false';
+		}
+	}
 }
